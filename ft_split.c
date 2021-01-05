@@ -6,7 +6,7 @@
 /*   By: abaudot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 15:29:18 by abaudot           #+#    #+#             */
-/*   Updated: 2021/01/05 18:46:18 by abaudot          ###   ########.fr       */
+/*   Updated: 2021/01/05 18:55:48 by abaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,22 +47,23 @@ static size_t	c_splts(t_addr_tab *arr, char const *s, char c)
 	return (nth_split);
 }
 
-static size_t	maman(char **ans_t, char **tab, char const *s, char c)
+static size_t	maman(char **ans_t, t_addr_tab *arr, char const *s, char c)
 {
-	size_t		i;
+	const int	max = arr->size;
+	int			i;
 	size_t		len;
 	
-	i = 0;
+	i = -1;
 	/////////pfffff/////
-	while (tab[i] i < MEMSIZ)
+	while (++i < max)
 	{
-		len = (size_t)(tab[i] - s);
+		len = (size_t)(arr->tab[i] - s);
 		ans_t[i] = (char *)malloc(len + 1);
 		if (!ans_t[i])
 			return (i + 1);
-		ft_memcpy(ans_t[i], s, len);
 		ans_t[i][len] = 0;
-		s = tab[i++];
+		ft_memcpy(ans_t[i], s, len);
+		s += len;
 		while (*s == c)
 			s++;
 	}
