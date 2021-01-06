@@ -6,14 +6,12 @@
 /*   By: abaudot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 15:09:38 by abaudot           #+#    #+#             */
-/*   Updated: 2021/01/05 17:47:26 by abaudot          ###   ########.fr       */
+/*   Updated: 2021/01/06 11:46:40 by abaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-
-///a refaire 2 par 2
 long int	find(const t_byte *s, int c)
 {
 	int i;
@@ -32,10 +30,10 @@ long int	find(const t_byte *s, int c)
 char		*ft_strchr(const char *s, int c)
 {
 	const t_byte	*s_ptr;
-	const t_op	*lg_ptr;
-	long int	ans;
-	t_op		charmask;
-	t_op		word;
+	const t_op		*lg_ptr;
+	long int		ans;
+	t_op			charmask;
+	t_op			word;
 
 	s_ptr = (const t_byte *)s;
 	while ((t_op)s_ptr & 0b111)

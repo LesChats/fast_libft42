@@ -6,7 +6,7 @@
 /*   By: abaudot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 15:03:01 by abaudot           #+#    #+#             */
-/*   Updated: 2021/01/05 18:00:02 by abaudot          ###   ########.fr       */
+/*   Updated: 2021/01/06 11:59:11 by abaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	s1_len; 
-	size_t	s2_len; 	
+	size_t	s1_len;
+	size_t	s2_len;
 	char	*ans;
 
 	if (!s1 || !s2)

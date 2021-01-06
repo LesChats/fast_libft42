@@ -23,16 +23,16 @@ static char	*small(const char *big, const char *little, size_t len, size_t n)
 	return (NULL);
 }
 
-char	*ft_strnstr(const char *big, const char *little, size_t len)
+char		*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	size_t	n;
-	size_t	tmp;
-	const char *sav;
+	size_t		n;
+	size_t		tmp;
+	const char	*sav;
 
 	sav = big;
 	if (!(n = ft_strlen(little)))
 		return ((char *)sav);
-	if (len <  0x40)
+	if (len < 0x40)
 		return (small(big, little, len, n));
 	big = ft_strchr(big, *little);
 	tmp = (size_t)(big - sav);
@@ -45,8 +45,7 @@ char	*ft_strnstr(const char *big, const char *little, size_t len)
 			return ((char *)big);
 		sav = ++big;
 		big = ft_strchr(big, *little);
-		tmp = (size_t)(big - sav);
-		if (!big || tmp > len)
+		if (!big || (tmp = (size_t)(big - sav)) > len)
 			return (NULL);
 		len -= tmp;
 	}

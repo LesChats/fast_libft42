@@ -6,14 +6,13 @@
 /*   By: abaudot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 15:29:18 by abaudot           #+#    #+#             */
-/*   Updated: 2021/01/05 18:55:48 by abaudot          ###   ########.fr       */
+/*   Updated: 2021/01/06 11:40:58 by abaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#define MEMSIZ 1000
 
-static char		**clean_all(char ***ans, size_t n)
+static char		**clean_all(char ***ans, int n)
 {
 	while (n--)
 		free(*ans[n]);
@@ -21,11 +20,11 @@ static char		**clean_all(char ***ans, size_t n)
 	return (NULL);
 }
 
-static size_t	c_splts(t_addr_tab *arr, char const *s, char c)
+static int		c_splts(t_addr_tab *arr, char const *s, char c)
 {
 	char			*a_c;
-	size_t			nth_split;
-	
+	int				nth_split;
+
 	nth_split = 0;
 	while (*s && (a_c = ft_strchr(s, c)))
 	{
@@ -43,21 +42,22 @@ static size_t	c_splts(t_addr_tab *arr, char const *s, char c)
 		else
 			++nth_split;
 	}
-	arr->size = MIN(nth_split, MEMSIZ);
+	arr->size = nth_split;
+	if (nth_split > MEMSIZ)
+		arr->size = MEMSIZ;
 	return (nth_split);
 }
 
-static size_t	maman(char **ans_t, t_addr_tab *arr, char const *s, char c)
+static int		maman(char **ans_t, t_addr_tab *arr, char const *s, char c)
 {
 	const int	max = arr->size;
 	int			i;
-	size_t		len;
-	
+	int			len;
+
 	i = -1;
-	/////////pfffff/////
 	while (++i < max)
 	{
-		len = (size_t)(arr->tab[i] - s);
+		len = (int)(arr->tab[i] - s);
 		ans_t[i] = (char *)malloc(len + 1);
 		if (!ans_t[i])
 			return (i + 1);
@@ -70,25 +70,31 @@ static size_t	maman(char **ans_t, t_addr_tab *arr, char const *s, char c)
 	return (0);
 }
 
-static size_t	papa(char **ans_t, const char *s, char c)
+static int		papa(char **ans_t, const char *s, char c)
 {
-	size_t	len;
-	size_t	i;
 	char	*a_c;
+	int		len;
+	int		i;
 
 	i = MEMSIZ;
-	while (*s == c)
-		s++;
 	while (*s && (a_c = ft_strchr(s, c)))
 	{
-		len = a_c - s;
+		len = (int)(a_c - s);
 		if (!(ans_t[i] = (char *)malloc(len + 1)))
 			return (i + 1);
 		ft_memcpy(ans_t[i], s, len);
 		ans_t[i++][len] = 0;
 		while (*a_c == c)
-			a_c++;
+			++a_c;
 		s = a_c;
+	}
+	if (*s)
+	{
+		len = ft_strlen(s);
+		if (!(ans_t[i] = (char *)malloc(len + 1)))
+			return (i + 1);
+		ft_memcpy(ans_t[i], s, len);
+		ans_t[i][len] = 0;
 	}
 	return (0);
 }
@@ -96,22 +102,27 @@ static size_t	papa(char **ans_t, const char *s, char c)
 char			**ft_split(char const *s, char c)
 {
 	t_addr_tab	save_arr;
-	size_t		n_splt;
 	char		**ans;
-	size_t		clean;
+	int			n_splt;
+	int			clean;
 
 	if (!s)
 		return (0);
 	while (*s == c)
 		++s;
-	n_splt = c_splts(save_arr, s, c);
+	n_splt = c_splts(&save_arr, s, c);
 	if (!(ans = (char **)malloc(sizeof(char *) * (n_splt + 1))))
 		return (0);
 	ans[n_splt] = 0;
-	if((clean = maman(ans, save_arr, s, c )))
+	if ((clean = maman(ans, &save_arr, s, c)))
 		return (clean_all(&ans, clean - 1));
 	if (n_splt > MEMSIZ)
-		if ((clean = papa(ans, s + (t_op)save_arr.tab[MEMSIZ - 1], c)))
+	{
+		s = save_arr.tab[MEMSIZ - 1];
+		while (*s == c)
+			s++;
+		if ((clean = papa(ans, s, c)))
 			return (clean_all(&ans, clean - 1));
+	}
 	return (ans);
 }

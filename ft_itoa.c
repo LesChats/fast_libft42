@@ -6,13 +6,13 @@
 /*   By: abaudot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 15:20:00 by abaudot           #+#    #+#             */
-/*   Updated: 2021/01/05 17:55:16 by abaudot          ###   ########.fr       */
+/*   Updated: 2021/01/06 11:26:55 by abaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		get_len (size_t x)
+int		get_len(size_t x)
 {
 	if (x >= 1000000000)
 		return (10);
@@ -20,7 +20,7 @@ int		get_len (size_t x)
 		return (9);
 	if (x >= 10000000)
 		return (8);
-	if (x >= 1000000)    
+	if (x >= 1000000)
 		return (7);
 	if (x >= 100000)
 		return (6);
@@ -30,7 +30,7 @@ int		get_len (size_t x)
 		return (4);
 	if (x >= 100)
 		return (3);
-	if (x >= 10)         
+	if (x >= 10)
 		return (2);
 	return (1);
 }
@@ -43,7 +43,7 @@ char	*ft_itoa(int n)
 
 	nn = (size_t)(n < 0 ? -(long int)n : n);
 	len = (n < 0 ? get_len(nn) + 2 : get_len(nn) + 1);
-	if(!(ans = (char *)malloc(len)))
+	if (!(ans = (char *)malloc(len)))
 		return (0);
 	ans += len;
 	*--ans = 0;
@@ -53,8 +53,8 @@ char	*ft_itoa(int n)
 	{
 		*--ans = '0' + (nn % 10);
 		nn /= 10;
-	}	
+	}
 	if (n < 0)
 		*--ans = '-';
 	return (ans);
-}	
+}

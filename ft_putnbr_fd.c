@@ -6,7 +6,7 @@
 /*   By: abaudot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 15:27:37 by abaudot           #+#    #+#             */
-/*   Updated: 2021/01/05 15:28:09 by abaudot          ###   ########.fr       */
+/*   Updated: 2021/01/06 11:59:35 by abaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	ft_putnbr_fd(int n, int fd)
 	char		buf[12];
 	long int	tmp;
 	size_t		i;
-	
-	if (fd < 0) 
+
+	if (fd < 0)
 		return ;
 	tmp = (long int)n;
 	if (n < 0)
@@ -36,4 +36,3 @@ void	ft_putnbr_fd(int n, int fd)
 		buf[--i] = '-';
 	write(fd, buf + i, 11 - i);
 }
-
