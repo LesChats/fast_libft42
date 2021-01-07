@@ -6,7 +6,7 @@
 /*   By: abaudot <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/05 15:20:00 by abaudot           #+#    #+#             */
-/*   Updated: 2021/01/06 11:26:55 by abaudot          ###   ########.fr       */
+/*   Updated: 2021/01/06 18:47:21 by abaudot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,10 @@ char	*ft_itoa(int n)
 	size_t		len;
 	size_t		nn;
 	char		*ans;
+	const char	signe = (n >> 31)
 
-	nn = (size_t)(n < 0 ? -(long int)n : n);
-	len = (n < 0 ? get_len(nn) + 2 : get_len(nn) + 1);
+	nn = (size_t)(signe ? -(long int)n : n);
+	len = (signe ? get_len(nn) + 2 : get_len(nn) + 1);
 	if (!(ans = (char *)malloc(len)))
 		return (0);
 	ans += len;
@@ -54,7 +55,7 @@ char	*ft_itoa(int n)
 		*--ans = '0' + (nn % 10);
 		nn /= 10;
 	}
-	if (n < 0)
+	if (signe)
 		*--ans = '-';
 	return (ans);
 }

@@ -30,7 +30,7 @@ static int		c_splts(t_addr_tab *arr, char const *s, char c)
 	{
 		if (nth_split < MEMSIZ)
 			arr->tab[nth_split] = a_c;
-		while (*a_c == c)
+		while (*a_c && *a_c == c)
 			a_c++;
 		s = a_c;
 		nth_split++;
@@ -108,7 +108,7 @@ char			**ft_split(char const *s, char c)
 
 	if (!s)
 		return (0);
-	while (*s == c)
+	while (*s && *s == c)
 		++s;
 	n_splt = c_splts(&save_arr, s, c);
 	if (!(ans = (char **)malloc(sizeof(char *) * (n_splt + 1))))
