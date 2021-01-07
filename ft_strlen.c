@@ -63,6 +63,6 @@ size_t	ft_strlen(const char *s)
 	const char	*s_start = s;
 
 	while (*s)
-		s++;
+		++s;
 	return ((size_t)(s - s_start));
 }

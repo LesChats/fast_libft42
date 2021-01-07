@@ -14,7 +14,7 @@
 
 char	*ft_strtrim(const char *s1, const char *set)
 {
-	unsigned char	hastab[254];
+	unsigned char	hastab[128];
 	size_t			len;
 	char			*ans;
 
@@ -22,7 +22,7 @@ char	*ft_strtrim(const char *s1, const char *set)
 		return (0);
 	if (!set || !*set)
 		return (ft_strdup(s1));
-	ft_bzero(hastab, 254);
+	ft_bzero(hastab, 128);
 	while (*set)
 		hastab[(unsigned char)*set++] = 1;
 	while (*s1 && hastab[(unsigned char)*s1])

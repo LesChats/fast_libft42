@@ -42,32 +42,18 @@
 **}
 */
 
-static size_t	ft_strnlen(const char *s, size_t maxlen)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	const char	*s_orig = s;
+	const size_t	dst_len = ft_strlen(dst);
+	const size_t	src_len = ft_strlen(src);
 
-	while (*s && maxlen > 0)
-	{
-		s++;
-		maxlen--;
-	}
-	return ((size_t)s - (size_t)s_orig);
-}
-
-size_t			ft_strlcat(char *dst, const char *src, size_t size)
-{
-	size_t	dst_len;
-
-	if (!dst && src && size == 0)
-		return (ft_strlen(src));
-	dst_len = ft_strnlen(dst, size);
 	if (size <= dst_len)
-		return (ft_strlen((char *)src) + size);
-	while (size && *dst)
-	{
-		size--;
-		dst++;
-	}
-	ft_strlcpy(dst, src, size);
-	return (ft_strlen((char *)src) + dst_len);
+		return (src_len + size);
+	size -= dst_len + 1;
+	dst += dst_len;
+	if (size > src_len)
+		size = src_len;
+	ft_memcpy(dst, src, size);
+	*(dst + size) = 0;
+	return (src_len + dst_len);
 }

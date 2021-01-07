@@ -12,20 +12,20 @@
 
 #include "libft.h"
 
-static void	recursive_clear(t_list **lst, void (*del)(void *))
+static void	clear_whit_data(t_list **lst, void (*del)(void *))
 {
 	if (!*lst)
 		return ;
-	recursive_clear(&((*lst)->next), del);
+	clear_whit_data(&((*lst)->next), del);
 	(*del)((*lst)->content);
 	free(*lst);
 }
 
-static void	recursive_cl(t_list **lst)
+static void	clear_only_lst(t_list **lst)
 {
 	if (!*lst)
 		return ;
-	recursive_cl(&((*lst)->next));
+	clear_only_lst(&((*lst)->next));
 	free(*lst);
 }
 
@@ -34,8 +34,8 @@ void		ft_lstclear(t_list **lst, void (*del)(void *))
 	if (!lst)
 		return ;
 	if (del)
-		recursive_clear(lst, del);
+		clear_whit_data(lst, del);
 	else
-		recursive_cl(lst);
+		clear_only_lst(lst);
 	*lst = NULL;
 }

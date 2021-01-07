@@ -41,15 +41,6 @@ typedef struct	s_addr_tab
 }				t_addr_tab;
 
 /*
-** need for strlcat
-*/
-typedef struct	s_tuple
-{
-	char		*d;
-	const char	*s;
-}				t_tuple;
-
-/*
 ** _____________definitons____________
 */
 

@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int		get_len(size_t x)
+static	int	get_len(size_t x)
 {
 	if (x >= 1000000000)
 		return (10);
@@ -35,12 +35,12 @@ int		get_len(size_t x)
 	return (1);
 }
 
-char	*ft_itoa(int n)
+char		*ft_itoa(int n)
 {
 	size_t		len;
 	size_t		nn;
 	char		*ans;
-	const char	signe = (n >> 31)
+	const char	signe = (n >> 31);
 
 	nn = (size_t)(signe ? -(long int)n : n);
 	len = (signe ? get_len(nn) + 2 : get_len(nn) + 1);
