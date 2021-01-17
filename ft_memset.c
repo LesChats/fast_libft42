@@ -14,7 +14,7 @@
 
 static inline void	loop(t_op *dstpp, t_op c, size_t len, size_t xlen)
 {
-	const t_op step = 8 * OPSIZ;
+	const t_op step = 64;
 
 	while (len)
 	{
@@ -49,7 +49,7 @@ void				*ft_memset(void *s, int c, size_t n)
 		cccc |= cccc << 8;
 		cccc |= cccc << 16;
 		cccc |= cccc << 32;
-		loop(&dstp, cccc, n / (OPSIZ * 8), (n % (OPSIZ * 8)) / OPSIZ);
+		loop(&dstp, cccc, n >> 6, (n & 63) >> 3);
 		n %= OPSIZ;
 	}
 	while (n--)

@@ -52,4 +52,6 @@ re:        fclean all
 bonus: ${OBJS} ${BONUSOBJS}
 	ar rcs ${NAME} ${OBJS} ${BONUSOBJS}
 
+so: all
+		gcc -o libft.so -shared -fPIC $(OBJS)
 .PHONY : all clean fclean re bonus

@@ -59,7 +59,11 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	const size_t len = ft_strlen(s) + 1;
-
-	return (ft_memchr(s, c, len));
+	if (c == '\0')
+		return ((char *)(s + ft_strlen(s)));
+	while (*s != c && *s)
+		++s;
+	if (*s)
+		return ((char *)s);
+	return (0);
 }

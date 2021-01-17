@@ -48,7 +48,7 @@ static int		c_splts(t_addr_tab *arr, char const *s, char c)
 	return (nth_split);
 }
 
-static int		maman(char **ans_t, t_addr_tab *arr, char const *s, char c)
+static int		in_memsiz(char **ans_t, t_addr_tab *arr, char const *s, char c)
 {
 	const int	max = arr->size;
 	int			i;
@@ -70,7 +70,7 @@ static int		maman(char **ans_t, t_addr_tab *arr, char const *s, char c)
 	return (0);
 }
 
-static int		papa(char **ans_t, const char *s, char c)
+static int		out_memsiz(char **ans_t, const char *s, char c)
 {
 	char	*a_c;
 	int		len;
@@ -114,14 +114,14 @@ char			**ft_split(char const *s, char c)
 	if (!(ans = (char **)malloc(sizeof(char *) * (n_splt + 1))))
 		return (0);
 	ans[n_splt] = 0;
-	if ((clean = maman(ans, &save_arr, s, c)))
+	if ((clean = in_memsiz(ans, &save_arr, s, c)))
 		return (clean_all(&ans, clean - 1));
 	if (n_splt > MEMSIZ)
 	{
 		s = save_arr.tab[MEMSIZ - 1];
 		while (*s == c)
 			s++;
-		if ((clean = papa(ans, s, c)))
+		if ((clean = out_memsiz(ans, s, c)))
 			return (clean_all(&ans, clean - 1));
 	}
 	return (ans);

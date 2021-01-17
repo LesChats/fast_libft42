@@ -32,8 +32,8 @@ static inline void	wordcopy(t_op dstp, t_op srcp, size_t len)
 		a1 = ((t_op *)srcp)[1];
 		((t_op *)dstp)[0] = a0;
 		((t_op *)dstp)[1] = a1;
-		srcp += 2 * OPSIZ;
-		dstp += 2 * OPSIZ;
+		srcp += 16;
+		dstp += 16;
 		len -= 2;
 	}
 }
@@ -49,17 +49,10 @@ void				*ft_memcpy(void *dest, const void *src, size_t n)
 	srcp = (t_op)src;
 	if (n >= OP_T_THRES)
 	{
-		wordcopy(dstp, srcp, n / OPSIZ);
+		wordcopy(dstp, srcp, n >> 3);
 		srcp += n & -OPSIZ;
 		dstp += n & -OPSIZ;
-		n %= OPSIZ;
-	}
-	else if (n >= OPSIZ)
-	{
-		*(t_op *)dstp = *(t_op *)srcp;
-		n -= OPSIZ;
-		dstp += OPSIZ;
-		srcp += OPSIZ;
+		n &= 7;
 	}
 	while (n--)
 		*(t_byte *)dstp++ = *(t_byte *)srcp++;

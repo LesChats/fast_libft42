@@ -10,14 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
+** thank you MJ for improving the fist while check <3
+*/
+
 int	ft_atoi(const char *str)
 {
 	unsigned char	c;
 	long int		res;
 
 	res = 0;
-	while (((*str) == ' ' || (*str) == '\t' || (*str) == '\n' ||
-		(*str) == '\v' || (*str) == '\f' || (*str) == '\r'))
+	while (*str == ' ' || (unsigned)*str - '\t' < 5)
 		++str;
 	if (*str == '-')
 	{

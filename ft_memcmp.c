@@ -41,7 +41,7 @@ int					ft_memcmp(const void *s1, const void *s2, size_t n)
 		return (0);
 	s1_p = (t_op)s1;
 	s2_p = (t_op)s2;
-	g_len = n / OPSIZ;
+	g_len = n >> 3;
 	while (g_len)
 	{
 		if (*(t_op *)s1_p != *(t_op *)s2_p)

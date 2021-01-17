@@ -28,8 +28,8 @@ static inline void	wordcopy(t_op *dstp, t_op *srcp, size_t len)
 	}
 	while (len)
 	{
-		*srcp -= 2 * OPSIZ;
-		*dstp -= 2 * OPSIZ;
+		*srcp -= 16;
+		*dstp -= 16;
 		a1 = ((t_op *)*srcp)[1];
 		a0 = ((t_op *)*srcp)[0];
 		((t_op *)*dstp)[1] = a1;
@@ -53,8 +53,8 @@ void				*ft_memmove(void *dest, const void *src, size_t n)
 	dstp += n;
 	if (n >= OPSIZ)
 	{
-		wordcopy(&dstp, &srcp, n / OPSIZ);
-		n %= OPSIZ;
+		wordcopy(&dstp, &srcp, n >> 3);
+		n &= 7;
 	}
 	while (n--)
 		*(unsigned char *)(--dstp) = *(unsigned char *)(--srcp);

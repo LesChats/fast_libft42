@@ -20,7 +20,7 @@ void		*ft_memchr(const void *s, int c, size_t n)
 	rep_c = c | (c << 8);
 	rep_c |= rep_c << 16;
 	rep_c |= rep_c << 32;
-	while (n >= OPSIZ)
+	while (n > OPSIZ)
 	{
 		lw = *(t_op *)s ^ rep_c;
 		if ((lw - LOMAGIC) & ~lw & HIMAGIC)
